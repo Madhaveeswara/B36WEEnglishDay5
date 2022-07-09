@@ -1,6 +1,6 @@
-console.log(" ***********  Arrow  Functions  ************ ");
 
-//Print Odd numbers in an array
+//=============================================================================================
+//a. Print Odd numbers in an array
 //Anonymous function
 let printOddNumbersFunc = function (arrayParam) {
 
@@ -44,7 +44,7 @@ printOddNumbersFunc(data);
 
 //====================================================================================================
 
-//Convert all Strings to Title Caps in a String array
+//b. Convert all Strings to Title Caps in a String array
 let data2 = ["new delhi", "new york", "abu dhabi", "saudi arabia"];
 
 //Anonymous functions
@@ -105,7 +105,7 @@ titleCapsStrings(data2);
 
 //====================================================================================================
 
-//Sum of all numbers in an array
+//c. Sum of all numbers in an array
 let data3 = [1,2,3,4,5,6,7,8];
 
 let sumOfAllNumbers = function(arrayParam) {
@@ -154,11 +154,77 @@ let sumOfAllNumbers = function(arrayParam) {
 })(data3);
 
 //=========================================================================================
-//Return all Palindromes in an array.
+//d. Return all Prime numbers in an array
+let rawData = [1,2,4,5,13,14,18,17,20,22,23,24,21,27,28,29,30,31,32,36];
+
+let allPrimeNumbersInArray = function(arrayParam) {
+     
+    // A Prime number is divisible by 1 and itself 
+    // Check for this condition for every element in the array.
+   let resultArray = arrayParam.filter((element) => {
+            
+        let flag = 0;
+
+        if(element === 1) return false;
+
+        for(let j = 1; j <=element; j++)
+        if(element%j == 0){
+            flag++;
+        }
+
+        if(flag === 2){
+            return true;
+        } else {
+            return false;
+        }
+
+    });
+
+    //console.log("Prime Numbers ",resultArray);
+    return resultArray;
+}
+
+console.log("Prime Numbers returned",allPrimeNumbersInArray(rawData));
+
+
+// IIFE
+let resultPrimeNumbersArray = (function(arrayParam){
+
+    console.log(" =====  IIFE function  ===== ");
+
+    let resultArray =  arrayParam.filter((element) => {
+            
+        let flag = 0;
+
+        if(element === 1) return false;
+
+        for(let j = 1; j <=element; j++)
+        if(element%j == 0){
+            flag++;
+        }
+
+        if(flag === 2){
+            return true;
+        } else {
+            return false;
+        }
+
+    })
+
+    //console.log("Prime Numbers ",resultArray);
+    return resultArray;
+
+})(rawData);
+
+console.log("Prime Numbers returned ",resultPrimeNumbersArray)
+
+
+//=========================================================================================
+//e. Return all Palindromes in an array.
 
 let data4 = ["MaxxaM","MadaM","Max","Vikram","PabloolbaP"];
 
-let printAllPalindromes = function(arrayParam) {
+let getAllPalindromes = function(arrayParam) {
 
     console.log(" =====  Anonymous function  ===== ");
 
@@ -175,19 +241,20 @@ let printAllPalindromes = function(arrayParam) {
             return true;
         });
 
-        console.log(resultArray);
+        //console.log(resultArray);
+        return resultArray;
 
     } else {
         console.log("Null array or No elements to process.");       
-    
+        return [];
     }   
 
 }
 
-printAllPalindromes(data4);
+console.log("Palindromes ",getAllPalindromes(data4));
 
 // IIFE
-(function(){
+let palindromes = (function(){
 
     console.log(" =====  IIFE function  ===== ");
 
@@ -204,19 +271,21 @@ printAllPalindromes(data4);
             return true;
         });
 
-        console.log(resultArray);
-
+        //console.log(resultArray);
+        return resultArray;
     } else {
         console.log("Null array or No elements to process.");       
-    
+        return [];
     }   
 
 
 })(data4);
 
+console.log("Palindromes ",palindromes);
+
 //==============================================================================================
 
-// Print the median of two sorted arrays 
+//f. Print the median of two sorted arrays 
 let data5 = [4, 5, 6, 8];
 let data6 = [9, 12, 14, 18, 20];
 
@@ -262,7 +331,7 @@ let medianOfArray = function(arrayParam){
 
 }
 
-console.log(medianOfArray(finalArray));
+console.log("Median of Array", medianOfArray(finalArray));
 
 //============  IIFE  ================
 
@@ -303,7 +372,93 @@ let medianVal = (function() {
 
         })(data5, data6, array1Length, array2Length);
 
-console.log(medianVal);
+console.log("Median of Array",medianVal);
+
+
+//===========================================================================================
+
+//g. Remove duplicates from an array.
+let data7 = ['a', 'b', 'c', 'c','a','d','e','f','e'];
+
+
+let removeDuplicates = function() { 
+    console.log(" ==== Anonymous function ==== ");
+
+let resultArray7 = [];
+
+data7.forEach((element) => {
+
+    if(!resultArray7.includes(element)){
+        resultArray7.push(element);
+    }
+
+});
+
+console.log(resultArray7);
+
+}
+
+removeDuplicates();
+
+// ==== IIFE ====
+(function() {
+
+    console.log(" ==== IIFE ==== ");
+    let resultArray8 = data7.filter((element, index) => (index == data7.indexOf(element)));
+    
+    console.log(resultArray8);
+
+})();
+
+
+//===================================================================================
+//h.Rotate an array by k times
+
+let data8 = [4,5,6,7,8,9,10];
+
+let rotateBy = function(dataParam, numberOfTimes) {
+
+    console.log(" Anonymous function ");
+    console.log("Before Right Rotation ", dataParam);
+    console.log(" Rotate By ",numberOfTimes);
+    //Rotate right the array by passed number of times.
+   for(let i = 0; i < numberOfTimes; i++){
+       let tempVal = dataParam[0];
+
+       for(let k = 0; k < dataParam.length -1; k++){
+        dataParam[k] = dataParam[k+1];
+       }
+
+       dataParam[dataParam.length -1] = tempVal;
+   }
+   console.log("After Right Rotation ", dataParam)
+  
+
+}
+
+rotateBy(data8,4);
+
+// ==== IIFE ====
+(function(dataParam, numberOfTimes) {
+
+    console.log(" ==== IIFE ==== ");
+
+    console.log("Before Right Rotation ", dataParam);
+    console.log(" Rotate By ",numberOfTimes);
+    //Rotate right the array by passed number of times.
+   for(let i = 0; i < numberOfTimes; i++){
+       let tempVal = dataParam[0];
+
+       for(let k = 0; k < dataParam.length -1; k++){
+        dataParam[k] = dataParam[k+1];
+       }
+
+       dataParam[dataParam.length -1] = tempVal;
+   }
+   console.log("After Right Rotation ", dataParam)
+ 
+
+})(data8, 2);
 
 
 
